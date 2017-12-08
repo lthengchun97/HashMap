@@ -1,25 +1,31 @@
 #include "HashMap.h"
+#include "Data.h"
 #include <malloc.h>
 #include <stdint.h>
 #include <stdio.h>
+#include "linkedlist.h"
 
 void hashMapInit(HashTable *table, int size){
-  table->list = (LinkedList **)calloc(size *SIZE_FACTOR,sizeof(LinkedList **));
+  table->list = (LinkedList *)calloc(size *SIZE_FACTOR,sizeof(LinkedList));
   table->size = size;
+  table->sizeFactor = SIZE_FACTOR;
+  int i;
+  for (i = 0; i < size; i++) {
+  listInit (&table->list[i]);
+  }
 }
 
 void _hashMapAdd(HashTable *table, void *data, int index){
-  table->list = (LinkedList **)malloc(sizeof(LinkedList **));
-  table->list->
-  table->list->head->data = data;
-
+  Item *newItem = (Item *)malloc(sizeof(Item));
+  createItem(newItem,data,NULL);
+  listAdd(&table->list[index],newItem);
 }
 
-void _hashMapSearch(HashTable *table, void *data, Compare compareFunc){
-
+void *_hashMapSearch(HashTable *table,uint32_t key, int index, Compare compareFunc){
+  
 }
 
-void _hashMapRemove(HashTable *table, void *data, Compare compareFunc){
+void *_hashMapRemove(HashTable *table,uint32_t key, int index, Compare compareFunc){
 
 
   //free memory

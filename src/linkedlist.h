@@ -15,5 +15,6 @@ struct LinkedList{
 };
 void listInit ( LinkedList *list);
 void listAdd(LinkedList *list, Item*item);
-
+void createItem(Item *item,void * data,Item *next);
+Item listSearch(LinkedList *list, void* data, Compare integerKeyCompare);
 #endif // _LINKEDLIST_H
