@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "linkedlist.h"
+#include "Data.h"
 
 void hashMapInit(HashTable *table, int size){
   table->list = (LinkedList *)calloc(size *SIZE_FACTOR,sizeof(LinkedList));
@@ -15,38 +16,33 @@ void hashMapInit(HashTable *table, int size){
   }
 }
 
-void _hashMapAdd(HashTable *table, void *data, int index){
+void _hashMapAdd(HashTable *table, void *data,int index){
   Item *newItem = (Item *)malloc(sizeof(Item));
   createItem(newItem,data,NULL);
   listAdd(&table->list[index],newItem);
+  &table->list[index].head->data->key == 1;
 }
 
-void *_hashMapSearch(HashTable *table,uint32_t key, int index, Compare compareFunc){
-  
+Item *_hashMapSearch(HashTable *table,uint32_t key, int index, Compare compareFunc){
+  return listSearch(&(table->list[index]),key,compareFunc);
 }
 
 void *_hashMapRemove(HashTable *table,uint32_t key, int index, Compare compareFunc){
-
-
-  //free memory
+  listRemove(&(table->list[index]),key,compareFunc);
 }
 
 uint32_t hashUsingModulo(uint32_t value,uint32_t range){
-  uint32_t result;
-  result = value % range;
-  return result;
+  return value % range;
 }
-
 
 // For current information , the hashValue is the location of the storing data.
 // Means that the data (int) will write in to the hashValue.
-void hashMapAddInteger(HashTable *table, int data){
+void hashMapAddInteger(HashTable *table, void *data,uint32_t key){
   // Compute hash value
   // hashValue = hash ( ... );
-
-  uint32_t hashValue = hashUsingModulo(data, table->size);
-  printf("%d",hashValue);
-  _hashMapAdd(table,(void *)data,hashValue);
+  Data *intdata = intCreate(key,data);
+  uint32_t index = hashUsingModulo(intdata->value, table->size);
+  _hashMapAdd(table,data,index);
 }
 
 void hashMapSearch(HashTable *table, int data){
