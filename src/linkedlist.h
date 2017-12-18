@@ -22,4 +22,5 @@ void listAdd(LinkedList *list, Item*item);
 void createItem(Item *item,void * data,Item *next);
 Item *listSearch(LinkedList *list, uint32_t key, Compare integerKeyCompare);
 void *listRemove(LinkedList *list,uint32_t key, Compare integerCompare);
+void listReplace(LinkedList *list,Item *item,uint32_t key, Compare integerCompare);
 #endif // _LINKEDLIST_H

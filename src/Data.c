@@ -2,7 +2,7 @@
 #include <malloc.h>
 #include "Data.h"
 
-Data *dataCreate(uint32_t key , char* name){
+Data *dataCreate(uint32_t key , void* name){
   Data *data =(Data *)malloc(sizeof(Data));
   data->key = key;
   data->name = name;
@@ -10,7 +10,7 @@ Data *dataCreate(uint32_t key , char* name){
 }
 
 
-Data *intCreate(uint32_t key , int value){
+Data *intCreate(uint32_t key , void* value){
   Data *data =(Data *)malloc(sizeof(Data));
   data->key = key;
   data->value = value;

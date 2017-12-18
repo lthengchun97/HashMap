@@ -27,6 +27,34 @@ void listAdd(LinkedList *list, Item*item)
   item->next = NULL;
 }
 
+void listReplace(LinkedList *list,Item *item,uint32_t key, Compare integerCompare){
+  int X =0;
+    Item *now = list->head;
+    while(now != NULL){
+    if(integerCompare((void *)key,(void *)&(((Data *)(now->data))->key))==1){
+      ((Data *)(now->data))->name =((Data *)(item->data))->name;
+      X=1;
+    }
+      now = now->next;
+    }
+
+  if(list->len==0){
+    list->head = item;
+    list->tail = item;
+    list->len  = 1;
+    item->next = NULL;
+  }
+  else{
+    if(X==0){
+    list->tail->next=item;
+    list->tail = item;
+    list->len += 1;
+    item->next = NULL;
+  }
+  }
+
+}
+
 void createItem(Item *item,void * data,Item *next){
   item->data=data;
   item->next=next;
@@ -46,7 +74,7 @@ void *listRemove(LinkedList *list,uint32_t key, Compare integerCompare){
 			}
 
 			if(now==list->head){
-				if(list->head==list->tail){	
+				if(list->head==list->tail){
 					listInit(list);
 				}
 				else{

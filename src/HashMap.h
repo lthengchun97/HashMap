@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "linkedlist.h"       // LinkedList file
+#include "Compare.h"
+#include "integerCompare.h"
 
 #define SIZE_FACTOR 3
 
@@ -18,11 +20,13 @@ struct HashTable {
 };
 
 void hashMapInit(HashTable *table, int size);
-void _hashMapAdd(HashTable *table, void *data,int index);
+void _hashMapAdd(HashTable *table, void *data,uint32_t key,int index, Compare compareFunc);
 Item *_hashMapSearch(HashTable *table,uint32_t key, int index, Compare compareFunc);
 void *_hashMapRemove(HashTable *table,uint32_t key, int index, Compare compareFunc);
 uint32_t hashUsingModulo(uint32_t value,uint32_t range);
 uint32_t hashFunction(void *data, uint32_t key);
 void hashMapAddInteger(HashTable *table, void *data,uint32_t key);
+void hashMapSearchInteger(HashTable *table, void *data,uint32_t key);
+void hashMapRemoveInteger(HashTable *table, void *data,uint32_t key);
 
 #endif // _HASHMAP_H
