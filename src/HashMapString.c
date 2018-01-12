@@ -1,9 +1,4 @@
 #include "HashMapString.h"
-#include "HashMap.c"
-#include "Data.h"
-#include "Compare.h"
-#include "linkedlist.h"
-#include "integerCompare.h"
 #include <stdio.h>
 
 int compareString(char *str, char *strRef){

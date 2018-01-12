@@ -6,14 +6,13 @@
 #include "linkedlist.h"       // LinkedList file
 #include "Compare.h"
 #include "integerCompare.h"
-#include "HashMapString.h"
+#include "Exception.h"
 
 #define SIZE_FACTOR 3
 
 typedef int (*Compare)(void *data, void *refData);
 
 typedef struct HashTable HashTable;
-
 struct HashTable {
   LinkedList *list;
   int size;
