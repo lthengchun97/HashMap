@@ -6,6 +6,7 @@
 #include "linkedlist.h"       // LinkedList file
 #include "Compare.h"
 #include "integerCompare.h"
+#include "HashMapString.h"
 
 #define SIZE_FACTOR 3
 
