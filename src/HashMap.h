@@ -7,9 +7,11 @@
 #include "Compare.h"
 #include "integerCompare.h"
 #include "Exception.h"
+#include "CException.h"
 
 #define SIZE_FACTOR 3
-
+#define BOUNDARY_ERROR 1
+#define DATA_ERROR  0
 typedef int (*Compare)(void *data, void *refData);
 
 typedef struct HashTable HashTable;

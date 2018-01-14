@@ -6,6 +6,8 @@
 #include "Compare.h"
 #include "linkedlist.h"
 #include "integerCompare.h"
+#include "Exception.h"
+#include "CException.h"
 
 void hashMapSearchString(HashTable *table, char *data,uint32_t key);
 void hashMapRemoveString(HashTable *table, char *data,uint32_t key);
