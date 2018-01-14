@@ -133,58 +133,6 @@ void test__hashMapAdd_given_empty_hash_table_and_value_5_is_added_expect_5_inser
     TEST_ASSERT_EQUAL(5,(int*)(table.list[7].head->data));
 }
 
-/**
-  * index
-  *       -------
-  *       /     /
-  *   7   /     /   -----> 5 --> 3
-  *       /     /
-  *       /     /
-  **/
-
-/*
-void test__hashMapAdd_given_values_5_and_3_are_added_expect_the_data_int_the_list_at_index_7(void)
-{
-    HashTable table;
-    hashMapInit(&table,10);
-    _hashMapAdd(&table,(int *)5,0,7,(Compare) integerKeyCompare);
-    _hashMapAdd(&table,(int *)3,1,7,(Compare) integerKeyCompare);
-
-    TEST_ASSERT_NOT_NULL(table.list[7].head);
-    TEST_ASSERT_EQUAL(5,(int*)(table.list[7].head->data));
-    TEST_ASSERT_NOT_NULL((int*)(table.list[7].head->next));
-    TEST_ASSERT_EQUAL(3,(int*)(table.list[7].head->next->data));
-    TEST_ASSERT_NULL((int*)(table.list[7].head->next->next));
-}
-*/
-/**
-  * index
-  *       -------
-  *       /     /
-  *   7   /     /   -----> 5 --> 3 --> 5
-  *       /     /
-  *       /     /
-  **/
-
-/*
-void test__hashMapAdd_given_values_5_and_3_are_added_expect_the_data_int_the_list_with_duplicate(void)
-{
-    HashTable table;
-    hashMapInit(&table,10);
-    _hashMapAdd(&table,(void *)5,0,7,(Compare) integerKeyCompare);
-    _hashMapAdd(&table,(void *)3,1,7,(Compare) integerKeyCompare);
-    _hashMapAdd(&table,(void *)5,2,7,(Compare) integerKeyCompare);
-
-    TEST_ASSERT_NOT_NULL(table.list[7].head);
-    TEST_ASSERT_EQUAL(5,(int*)(table.list[7].head->data));
-    TEST_ASSERT_NOT_NULL((int*)(table.list[7].head->next));
-    TEST_ASSERT_EQUAL(3,(int*)(table.list[7].head->next->data));
-    TEST_ASSERT_NOT_NULL((int*)(table.list[7].head->next->next));
-    TEST_ASSERT_EQUAL(5,(int*)(table.list[7].head->next->next->data));
-    TEST_ASSERT_NULL((int*)(table.list[7].head->next->next->next));
-}
-*/
-
 void test__hashMapRemove_given_5_3_then_remove_3_expected_3_removed(void){
   Data *data,*david,*ali,*data1;
   HashTable hashTable;
@@ -230,6 +178,29 @@ void test__hashMapRemove_given_5_3_then_remove_3_expected_3_removed_v1(void){
   //data = (Data *)_hashMapRemove(&hashTable,ali->key,7,(Compare) integerKeyCompare);
   //TEST_ASSERT_EQUAL(3,data->key);
   //TEST_ASSERT_EQUAL_STRING("Ali",data->name);
+}
+Catch(ex)
+{
+  dumpException(ex);
+}
+  free(david);
+  free(ali);
+}
+
+void test_hashMapAddString_Given_empty_hash_table_and_Ali_David(void){
+  Data *data,*ali,*david;
+  HashTable hashTable;
+  hashMapInit(&hashTable,10);
+  Try{
+  david = dataCreate(5,"David");
+  hashMapAddString(&hashTable,"David",5);
+  ali = dataCreate(8,"Ali");
+  hashMapAddString(&hashTable,"Ali",8);
+
+  TEST_ASSERT_EQUAL(hashTable.list[5].head->data->name,"David");
+  TEST_ASSERT_EQUAL(hashTable.list[8].head->data->name,"Ali");
+  TEST_ASSERT_NULL(hashTable.list[5].head->next);
+  TEST_ASSERT_NULL(hashTable.list[8].head->next);
 }
 Catch(ex)
 {
