@@ -133,7 +133,7 @@ void test__hashMapAdd_given_empty_hash_table_and_value_5_is_added_expect_5_inser
     TEST_ASSERT_EQUAL(5,(int*)(table.list[7].head->data));
 }
 
-void test__hashMapRemove_given_5_3_then_remove_3_expected_3_removed(void){
+void test__hashMapRemove_given_ali_and_david_then_remove_ali_expected_ali_removed(void){
   Data *data,*david,*ali,*data1;
   HashTable hashTable;
   hashMapInit(&hashTable,10);
@@ -159,7 +159,7 @@ Catch(ex)
   free(ali);
 }
 
-void test__hashMapRemove_given_5_3_then_remove_3_expected_3_removed_v1(void){
+void test__hashMapSearch_given_ali_and_david_then_search_david(void){
   Data *data,*david,*ali,*data1;
   HashTable hashTable;
   hashMapInit(&hashTable,10);
@@ -208,4 +208,30 @@ Catch(ex)
 }
   free(david);
   free(ali);
+}
+
+void test_hashMapRemoveString_given_David_and_Ali_then_remove_David(void){
+  Data *data,*data1,*ali,*david;
+  HashTable hashTable;
+  hashMapInit(&hashTable,10);
+  Try{
+  david = dataCreate(5,"David");
+  hashMapAddString(&hashTable,"David",5);
+  ali = dataCreate(6,"Ali");
+  hashMapAddString(&hashTable,"Ali",6);
+
+  TEST_ASSERT_EQUAL(hashTable.list[5].head->data->name,"David");
+  data =  (Data *)(hashTable.list[5].head->data->name);
+  TEST_ASSERT_NOT_NULL(data);
+  hashMapRemoveString(&hashTable,"David",5);
+  data1 =  (Data *)(hashTable.list[5].head->data->next);
+  TEST_ASSERT_NULL(data1);
+  }
+  Catch(ex)
+  {
+    dumpException(ex);
+  }
+  free(david);
+  free(ali);
+
 }

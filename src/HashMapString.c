@@ -39,9 +39,8 @@ void hashMapRemoveString(HashTable *table, char *data,uint32_t key){
   // Compute hash value
   // hashValue = hash ( ... );
   Try{
-  Data *intdata = intCreate(key,data);
-  uint32_t index = hashUsingModulo(intdata->value, table->size);
-  _hashMapRemove(table,key,index, (Compare) compareString);
+  Data *intdata = dataCreate(key,data);
+  _hashMapRemove(table,key,hashUsingModulo(intdata->value, table->size), (Compare) compareString);
   }
   Catch(ex){
     Throw(ex);
