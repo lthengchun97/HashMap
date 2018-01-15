@@ -9,7 +9,7 @@
 #include "Exception.h"
 #include "CException.h"
 
-void hashMapSearchString(HashTable *table, char *data,uint32_t key);
+void* hashMapSearchString(HashTable *table, char *data,uint32_t key);
 void hashMapRemoveString(HashTable *table, char *data,uint32_t key);
 void hashMapAddString(HashTable *table, char* data,uint32_t key);
 int stringKeyCompare(uint32_t key,Data *data);

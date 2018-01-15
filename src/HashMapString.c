@@ -22,7 +22,7 @@ void hashMapAddString(HashTable *table, char* data,uint32_t key){
   }
 }
 
-void hashMapSearchString(HashTable *table, char *data,uint32_t key){
+void* hashMapSearchString(HashTable *table, char *data,uint32_t key){
   // Compute hash value
   // hashValue = hash ( ... );
   Try{

@@ -68,7 +68,7 @@ void hashMapAddInteger(HashTable *table, void *data,uint32_t key){
   }
 }
 
-void hashMapSearchInteger(HashTable *table, void *data,uint32_t key){
+void *hashMapSearchInteger(HashTable *table, void *data,uint32_t key){
   // Compute hash value
   // hashValue = hash ( ... );
   Try{

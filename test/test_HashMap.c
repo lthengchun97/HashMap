@@ -90,9 +90,7 @@ void test__testMapSearch_given_values_5_and_3_in_the_table_then_search_for_3_Ali
   _hashMapAdd(&table,(void *)david,5,7,(Compare) integerKeyCompare);
   ali = dataCreate(3,"Ali");
   _hashMapAdd(&table,(void *)ali,3,7,(Compare) integerKeyCompare);
-
   data = (Data *)_hashMapSearch(&table,ali->key,7,(Compare) integerKeyCompare);
-
   TEST_ASSERT_NOT_NULL(data);
   TEST_ASSERT_EQUAL(3,data->key);
   TEST_ASSERT_EQUAL_STRING("Ali",data->name);
@@ -159,7 +157,7 @@ Catch(ex)
   free(ali);
 }
 
-void test__hashMapSearch_given_ali_and_david_then_search_david(void){
+void test__hashMapSearch_given_ali_and_david_then_search_ali(void){
   Data *data,*david,*ali,*data1;
   HashTable hashTable;
   hashMapInit(&hashTable,10);
@@ -169,7 +167,7 @@ void test__hashMapSearch_given_ali_and_david_then_search_david(void){
   ali = dataCreate(5,"Ali");
   _hashMapAdd(&hashTable,(void *)ali, 5,7,(Compare) integerKeyCompare);
 
-  data = (Data *)_hashMapSearch(&hashTable,david->key,7,(Compare) integerKeyCompare);
+  data = (Data *)_hashMapSearch(&hashTable,ali->key,7,(Compare) integerKeyCompare);
   TEST_ASSERT_NOT_NULL(data);
   TEST_ASSERT_EQUAL_STRING("Ali",data->name);
   data =  (Data *)(hashTable.list[7].head->next);
@@ -224,8 +222,32 @@ void test_hashMapRemoveString_given_David_and_Ali_then_remove_David(void){
   data =  (Data *)(hashTable.list[5].head->data->name);
   TEST_ASSERT_NOT_NULL(data);
   hashMapRemoveString(&hashTable,"David",5);
-  data1 =  (Data *)(hashTable.list[5].head->data->next);
+  data1 =  (Data *)(hashTable.list[5].head->next);
   TEST_ASSERT_NULL(data1);
+  }
+  Catch(ex)
+  {
+    dumpException(ex);
+  }
+  free(david);
+  free(ali);
+
+}
+
+void test_hashMapSearchString_given_David_Ali_then_search_Ali_expected_Ali_return(void){
+  Data *data1,*david,*ali;
+  HashTable hashTable;
+  hashMapInit(&hashTable,10);
+  Try{
+  david = dataCreate(5,"David");
+  hashMapAddString(&hashTable,(void *)david,5);
+  ali = dataCreate(8,"Ali");
+  hashMapAddString(&hashTable,(void *)ali,8);
+
+  data1=(Data *)hashMapSearchString(&hashTable,(void *)ali,8);
+  TEST_ASSERT_NOT_NULL(data1);
+  //TEST_ASSERT_EQUAL(8,data1->key);
+  //TEST_ASSERT_EQUAL_STRING("Ali",data1->name);
   }
   Catch(ex)
   {
